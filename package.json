@@ -1,0 +1,16 @@
+{
+  "name": "nodeEarthshakingAPI",
+  "version": "0.0.1",
+  "description": "Unified Hypermedia API for Earthshaking Music Data including Third Party API Wrappers",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Scott Trinh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.0.0",
+    "lodash": "^2.4.1",
+    "restler": "^3.2.1"
+  }
+}

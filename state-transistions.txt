@@ -1,0 +1,20 @@
+# From LightSpeed
+
+## Order
+- List of orders
+- Singleton order
+
+## OrderItems
+- List of orderItems
+- Singleton orderItem
+
+# Internal Database
+
+## Delivery
+- List of deliveries
+- Singleton delivery
+
+## DeliveryItems
+- List of deliveryItems
+- Singleton deliveryItem
+
