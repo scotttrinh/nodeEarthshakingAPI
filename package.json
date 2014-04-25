@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Unified Hypermedia API for Earthshaking Music Data including Third Party API Wrappers",
   "main": "index.js",
+  "repo": "https://github.com/scotttrinh/nodeEarthshakingAPI",
   "scripts": {
     "test": "mocha"
   },
@@ -11,6 +12,7 @@
   "dependencies": {
     "express": "^4.0.0",
     "lodash": "^2.4.1",
-    "restler": "^3.2.1"
+    "restler": "^3.2.1",
+    "chai": "~1.9.1"
   }
 }
