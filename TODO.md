@@ -10,3 +10,4 @@
 + Entity parser
 + HTML5 microformats2 wrapper
 + JSONAPI wrapper
++ If limit is not set in params, loop through and get all records
