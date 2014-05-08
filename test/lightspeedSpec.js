@@ -1,6 +1,6 @@
 var expect = require("chai").expect;
 var ls = require("../lib/lightspeed.js");
-var args = ["Orders",{"limit":"1"}];
+var _ = require("lodash");
 
 describe("LightSpeed", function() {
 
@@ -13,6 +13,23 @@ describe("LightSpeed", function() {
     expect(process.env.LS_ACCOUNT).to.exist;
   });
 
-  describe(".get()", function() {
+  describe(".createCall()", function() {
+    var lsOrder;
+
+    before(function (done) {
+      ls.createCall('get',
+                    'Order',
+                    {params:{limit:1,load_relations:"all"}},
+                    function(res){
+                      lsOrder = res;
+                      done();
+                    });
+    });
+
+    it("should return a non-empty object response", function() {
+      expect(_.isEmpty(lsOrder)).to.be.false;
+      expect(_.isObject(lsOrder)).to.be.true;
+    });
+
   });
 });

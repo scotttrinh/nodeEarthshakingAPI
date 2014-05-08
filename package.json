@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/scotttrinh/nodeEarthshakingAPI",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -R spec"
   },
   "author": "Scott Trinh",
   "license": "ISC",
