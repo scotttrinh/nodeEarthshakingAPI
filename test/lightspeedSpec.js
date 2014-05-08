@@ -14,6 +14,5 @@ describe("LightSpeed", function() {
   });
 
   describe(".get()", function() {
-    
   });
 });
