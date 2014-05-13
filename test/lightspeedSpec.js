@@ -24,10 +24,11 @@ describe("LightSpeed", function() {
     });
   });
 
-  describe(".createCall()", function() {
+  describe(".createCall() on collection endpoint", function() {
     var lsResponse;
     var testEntity = 'Employee';
     var resourceID = (function(str) { return str.substr(0,1).toLowerCase() + str.substr(1); })(testEntity) + 'ID';
+    this.timeout(0);
 
     before(function (done) {
       ls.createCall('get',
@@ -61,5 +62,64 @@ describe("LightSpeed", function() {
       expect(lsResponse[testEntity][0].href).to.equal(url);
     });
 
+  });
+  describe(".createCall() on an instance endpoint", function (){
+    var lsResponse;
+    var testEntityRoot = 'Employee';
+    var testEntityInstance = '2';
+    var testEntity = testEntityRoot + '/' + testEntityInstance;
+    this.timeout(0);
+
+    before(function (done) {
+      ls.createCall('get',
+                    testEntity,
+                    {params:{limit:1,load_relations:"all"}},
+                    function(res){
+                      lsResponse = res;
+                      console.log(lsResponse);
+                      done();
+                    });
+    });
+    it("should return a non-empty response", function() {
+      expect(_.isEmpty(lsResponse)).to.be.false;
+    });
+    it("should return a deserialized object", function() {
+      expect(_.isObject(lsResponse)).to.be.true;
+    });
+    it("should return the requested resource as an array", function() {
+      expect(_.isArray(lsResponse[testEntityRoot])).to.be.true;
+    });
+  });
+  describe("._arrayToCSVString", function(){
+    it("should return a string of comma separated values", function(){
+      expect(ls._arrayToCSVString(['1',2,'abc'])).to.equal('1,2,abc');
+    });
+  });
+  describe(".createCall() on an array of instance endpoints", function(){
+    var lsResponse;
+    var testEntityRoot = 'Order';
+    var testEntityInstances = ['8','10','12','abc'];
+    var testEntity = {};
+    testEntity[testEntityRoot] = testEntityInstances;
+    console.log(testEntity);
+    this.timeout(0);
+
+    before(function (done) {
+      ls.createCall('get',
+                    testEntity,
+                    {params:{limit:1,load_relations:"all"}},
+                    function(res){
+                      lsResponse = res;
+                      console.log(lsResponse);
+                      done();
+                    });
+    });
+    it("should return a response with correct length array of resources", function() {
+      expect(lsResponse[testEntityRoot].length).to.equal(4);
+    });
+    it("should return all valid resources requested and an empty record for invalid resources", function() {
+      expect(_.isEmpty(lsResponse[testEntityRoot]['8'])).to.be.false;
+      expect(_.isEmpty(lsResponse[testEntityRoot]['abc'])).to.be.true;
+    });
   });
 });
